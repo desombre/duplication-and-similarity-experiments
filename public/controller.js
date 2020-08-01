@@ -89,5 +89,11 @@ const onResetResultsClick = () => {
     byId("results").innerHTML = "Result: <br/>";
 }
 const highlight = (text, start, length) => {
-    return text.substring(0, start) + "<span class='highlight'>" + text.substring(start, start + length) + "</span>" + text.substring(start + length);
+    let textBufferSize = 12;
+    let end = start + length;
+    let dots = "...";
+    let prefix = start === 0 ? "" : dots;
+    let suffix = end === text.length ? "" : dots;
+
+    return prefix + text.substring(Math.max(0, start-textBufferSize), start) + "<span class='highlight'>" + text.substring(start, end) + "</span>" + text.substring(end, Math.min(end + textBufferSize, text.length)) + suffix;
 }
